@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -16,7 +17,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={clsx(inter.className)}>
+        <header className="fixed w-full bg-blue-800 p-4 flex justify-between">
+          <h1 className="text-2xl">FC Tactics 24</h1>
+          <nav>
+            <ul className="flex gap-4">
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/tactics">Tactics</a>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <div className="pt-16">{children}</div>
+      </body>
     </html>
   )
 }
