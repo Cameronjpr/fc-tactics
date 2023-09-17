@@ -2,6 +2,8 @@ import clsx from 'clsx'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { CreateTacticSheet } from './CreateTacticSheet'
+import { Providers } from './Providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,19 +21,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={clsx(inter.className)}>
         <header className="fixed w-full bg-blue-800 p-4 flex justify-between">
-          <h1 className="text-2xl">FC Tactics 24</h1>
-          <nav>
-            <ul className="flex gap-4">
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
-                <a href="/tactics">Tactics</a>
-              </li>
-            </ul>
-          </nav>
+          <a href="/">
+            <h1 className="text-2xl">FC Tactics 24</h1>
+          </a>
+          <CreateTacticSheet />
         </header>
-        <div className="pt-16">{children}</div>
+        <div className="pt-16">
+          <Providers>{children}</Providers>
+        </div>
       </body>
     </html>
   )

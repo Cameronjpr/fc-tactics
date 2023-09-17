@@ -1,7 +1,8 @@
+import { Position } from "@/lib/types"
 
 export type Formation = {
   name: string
-  positions: Array<string>
+  positions: Array<Position>
 }
 
 export const formations: Array<Formation> = [
@@ -35,6 +36,38 @@ export const formations: Array<Formation> = [
       'LW',
       'ST',
       'RW',
+    ],
+  },
+  {
+    name: '532',
+    positions: [
+      'GK',
+      'LWB',
+      'LCB',
+      'CCB',
+      'RCB',
+      'RWB',
+      'LCM',
+      'RCM',
+      'CAM',
+      'LS',
+      'RS',
+    ],
+  },
+  {
+    name: '352',
+    positions: [
+      'GK',
+      'LCB',
+      'CCB',
+      'RCB',
+      'LM',
+      'LCM',
+      'RCM',
+      'RM',
+      'CAM',
+      'LS',
+      'RS',
     ],
   },
 ]

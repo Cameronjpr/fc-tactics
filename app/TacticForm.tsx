@@ -16,6 +16,8 @@ import { useState } from 'react'
 import { Pitch } from './Pitch'
 import { formations } from './_data/formation'
 import { experimental_useFormStatus as useFormStatus } from 'react-dom'
+import { SheetClose } from '@/components/ui/sheet'
+import { Slider } from '@/components/ui/slider'
 
 export function TacticForm() {
   const [formationName, setFormationName] = useState(formations[0].name)
@@ -23,15 +25,13 @@ export function TacticForm() {
 
   async function onCreate(formData: FormData) {
     const res = await createTactic(formData)
-
-    console.log(res)
   }
 
   return (
-    <section>
+    <section className="flex flex-col justify-between gap-4 align-middle h-full">
       <form
         action={onCreate}
-        className="flex flex-col gap-2 justify-start text-left border-2 border-slate-700 rounded-lg p-4"
+        className="flex flex-col gap-4 justify-start text-left border-2 border-slate-700 rounded-lg p-4"
       >
         <Tabs defaultValue="general">
           <TabsList>
@@ -39,7 +39,7 @@ export function TacticForm() {
             <TabsTrigger value="attacking">Attacking</TabsTrigger>
             <TabsTrigger value="defending">Defending</TabsTrigger>
           </TabsList>
-          <TabsContent value="general">
+          <TabsContent value="general" className="flex flex-col gap-2">
             <Label htmlFor="name">Name</Label>
             <Input name="name" placeholder="Tactic name" />
             <Label htmlFor="formation">Formation</Label>
@@ -53,29 +53,40 @@ export function TacticForm() {
                 <SelectValue placeholder="Theme" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="442">442</SelectItem>
-                <SelectItem value="433">433</SelectItem>
+                {formations.map((formation) => (
+                  <SelectItem key={formation.name} value={formation.name}>
+                    {formation.name}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
             <Label htmlFor="width">Width</Label>
             <Input name="width" type="number" placeholder="8" />
           </TabsContent>
-          <TabsContent value="attacking">
+          <TabsContent value="attacking" className="flex flex-col gap-2">
             <Label htmlFor="width">Width</Label>
-            <Input name="width" type="number" placeholder="8" />
+            <Slider name="width" defaultValue={[5]} max={10} step={1} />
             <Label htmlFor="depth">Depth</Label>
-            <Input name="depth" type="number" placeholder="8" />
+            <Slider name="depth" defaultValue={[5]} max={10} step={1} />
+            <Label htmlFor="playerInBox">Players in box</Label>
+            <Slider name="playersInBox" defaultValue={[5]} max={10} step={1} />
+            <Label htmlFor="corners">Corners</Label>
+            <Slider name="corners" defaultValue={[5]} max={10} step={1} />
+            <Label htmlFor="freekicks">Free kicks</Label>
+            <Slider name="freekicks" defaultValue={[5]} max={10} step={1} />
           </TabsContent>
-          <TabsContent value="defending">
+          <TabsContent value="defending" className="flex flex-col gap-2">
             <Label htmlFor="width">Width</Label>
-            <Input name="width" type="number" placeholder="8" />
+            <Slider name="width" defaultValue={[5]} max={10} step={1} />
             <Label htmlFor="depth">Depth</Label>
-            <Input name="depth" type="number" placeholder="8" />
+            <Slider name="depth" defaultValue={[5]} max={10} step={1} />
           </TabsContent>
         </Tabs>
-        <Button disabled={pending} type="submit">
-          {pending ? 'Loading...' : 'Create'}
-        </Button>
+        <SheetClose asChild>
+          <Button disabled={pending} type="submit" className="mt-auto">
+            {pending ? 'Loading...' : 'Create'}
+          </Button>
+        </SheetClose>
       </form>
       <Pitch
         formation={
