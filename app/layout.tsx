@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={clsx(inter.className)}>
-        <header className="fixed w-full bg-blue-800 p-4 flex justify-between">
+        <header className="fixed w-full bg-blue-800 p-4 flex justify-between items-center">
           <a href="/">
             <h1 className="text-2xl">FC Tactics 24</h1>
           </a>

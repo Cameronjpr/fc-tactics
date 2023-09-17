@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 export async function GET(request: Request) {
   try {
     const result =
-      await sql`CREATE TABLE tactics ( name varchar(255), formation varchar(255) );`;
+      await sql`CREATE TABLE tactics ( uuid uuid() name varchar(255), formation varchar(255) );`;
     return NextResponse.json({ result }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
